@@ -1,0 +1,278 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Force smaller checkbox and radio button sizes */
+[data-radix-collection-item] {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+/* Checkbox specific sizing */
+button[role="checkbox"] {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+}
+
+/* Radio button specific sizing */
+button[role="radio"] {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+}
+
+/* Icons inside checkboxes and radio buttons */
+button[role="checkbox"] svg,
+button[role="radio"] svg {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+/* Fix select dropdown positioning and z-index issues - Force override all styles */
+[data-radix-select-content] {
+  z-index: 999999 !important;
+  position: fixed !important;
+  background: white !important;
+  color: black !important;
+  border: 2px solid #333 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  min-width: var(--radix-select-trigger-width) !important;
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  transform: none !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+/* Select dropdown viewport - Force proper display */
+[data-radix-select-viewport] {
+  min-width: var(--radix-select-trigger-width) !important;
+  padding: 8px !important;
+  background: white !important;
+  border-radius: 6px !important;
+  position: relative !important;
+  display: block !important;
+}
+
+/* Force Portal positioning */
+[data-radix-portal] {
+  z-index: 999999 !important;
+}
+
+/* Debug - make dropdown highly visible */
+[data-radix-select-content] * {
+  pointer-events: auto !important;
+}
+
+[data-radix-select-trigger][data-state="open"] + [data-radix-select-content] {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Select items styling - Force visibility */
+[data-radix-select-item] {
+  padding: 12px 16px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  outline: none !important;
+  color: black !important;
+  background: white !important;
+  line-height: 1.5 !important;
+  user-select: none !important;
+  display: block !important;
+  margin: 2px 0 !important;
+  font-size: 14px !important;
+  border: 1px solid transparent !important;
+}
+
+[data-radix-select-item]:hover,
+[data-radix-select-item][data-highlighted] {
+  background-color: #f3f4f6 !important;
+  color: black !important;
+  border-color: #d1d5db !important;
+}
+
+[data-radix-select-item][data-disabled] {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* Dialog overlays need proper z-index too */
+[data-radix-dialog-overlay] {
+  z-index: 9998 !important;
+}
+
+[data-radix-dialog-content] {
+  z-index: 9999 !important;
+}
+
+/* Popover positioning */
+[data-radix-popover-content] {
+  z-index: 9999 !important;
+}
+
+/* Tooltip positioning */
+[data-radix-tooltip-content] {
+  z-index: 10000 !important;
+}
+
+/* Fix select dropdown position to avoid overlapping */
+[data-radix-select-content][data-side="bottom"] {
+  transform-origin: top !important;
+  animation: slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+[data-radix-select-content][data-side="top"] {
+  transform-origin: bottom !important;
+  animation: slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile-first responsive optimizations */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  @media (min-width: 640px) {
+    body {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Mobile touch targets */
+@layer components {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Mobile-friendly buttons */
+  button, .btn {
+    @apply touch-target;
+  }
+  
+  /* Responsive table improvements */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(186, 95%, 36%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  --tango-50: hsl(186, 90%, 95%);
+  --tango-100: hsl(186, 85%, 90%);
+  --tango-500: hsl(186, 95%, 36%);
+  --tango-600: hsl(186, 95%, 30%);
+  --tango-700: hsl(186, 95%, 25%);
+  --tango-800: hsl(186, 95%, 20%);
+  --tango-900: hsl(186, 95%, 15%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(186, 95%, 36%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .tango-gradient {
+    background: linear-gradient(135deg, hsl(var(--tango-700)), hsl(var(--tango-800)));
+  }
+  
+  .seat-available {
+    @apply bg-green-400 hover:bg-green-500 cursor-pointer;
+  }
+  
+  .seat-taken {
+    @apply bg-red-400 cursor-not-allowed;
+  }
+  
+  .seat-selected {
+    @apply bg-red-500 hover:bg-red-600;
+  }
+  
+  .seat-vip-available {
+    @apply bg-amber-400 hover:bg-amber-500 cursor-pointer;
+  }
+}
