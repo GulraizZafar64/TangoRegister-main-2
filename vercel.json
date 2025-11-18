@@ -1,23 +1,20 @@
 {
-  "builds": [
+  "version": 2,
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "functions": {
+    "dist/index.js": {
+      "runtime": "@vercel/node@3.0.0"
+    }
+  },
+  "routes": [
     {
-      "src": "server/index.ts",
-      "use": "@vercel/node"
+      "src": "/api/(.*)",
+      "dest": "dist/index.js"
     },
     {
-      "src": "client/**/*.js",
-      "use": "@vercel/static-build"
+      "src": "/(.*)",
+      "dest": "/dist/$1"
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/server/index.ts"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/client/$1"
-    }
-  ],
-  "installCommand": "npm install --prefix ./client && npm install --prefix ./server"
+  ]
 }
