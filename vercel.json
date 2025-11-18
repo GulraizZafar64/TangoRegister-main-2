@@ -1,28 +1,19 @@
 {
-  "version": 2,
-  "builds": [
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "dist",
+  "framework": "express",
+  "rewrites": [
     {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "client/dist"
-      }
+      "source": "/api/:path*",
+      "destination": "/dist/index.js"
     },
     {
-      "src": "server/**/*.ts",
-      "use": "@vercel/node"
+      "source": "/:path*",
+      "destination": "/dist/index.js"
     }
   ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "server/index.ts"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "client/$1"
-    }
-  ],
-  "buildCommand": "cd client && npm install && npm run build",
-  "installCommand": "npm install && cd client && npm install && cd ../server && npm install"
+  "regions": ["iad1"],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
